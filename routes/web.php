@@ -21,6 +21,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\InicioController::class, 'index'])->name('home');
-Route::get('/cursos', [CursoController::class, 'index'])->name('courses.index')->middleware('auth');
-Route::get('/cursos/crear', [CursoController::class, 'create'])->name('courses.create')->middleware('auth');
+Route::get('/home', [App\Http\Controllers\InicioController::class, 'index']);
+Route::get('/cursos', [CursoController::class, 'index']);
+Route::get('/cursos/crear', [CursoController::class, 'create']);
