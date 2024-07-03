@@ -45,11 +45,11 @@ class CursoController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('materiales')) {
-            $data['materiales'] = $request->file('materiales')->store('materiales');
+            $data['materiales'] = $request->file('materiales')->store('materiales', 'public');
         }
 
         if ($request->hasFile('videos')) {
-            $data['videos'] = $request->file('videos')->store('videos');
+            $data['videos'] = $request->file('videos')->store('videos', 'public');
         }
 
         Curso::create($data);
@@ -71,9 +71,9 @@ class CursoController extends Controller
      */
    // Mostrar el formulario para editar un curso
    public function edit(Curso $curso)
-   {
-       return view('cursos.edit', compact('curso'));
-   }
+    {
+        return view('cursos.edit', compact('curso'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -94,16 +94,16 @@ class CursoController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('materiales')) {
-            $data['materiales'] = $request->file('materiales')->store('materiales');
+            $data['materiales'] = $request->file('materiales')->store('materiales', 'public');
         }
 
         if ($request->hasFile('videos')) {
-            $data['videos'] = $request->file('videos')->store('videos');
+            $data['videos'] = $request->file('videos')->store('videos', 'public');
         }
 
         $curso->update($data);
 
-        return redirect()->route('cursos.index')->with('success', 'Curso actualizado exitosamente.');
+        return redirect('/cursos')->with('success', 'Curso actualizado exitosamente.');
     }
 
     /**
