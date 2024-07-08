@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Curso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class CursoController extends Controller
 {
@@ -13,6 +15,10 @@ class CursoController extends Controller
     // Mostrar todos los cursos
     public function index()
     {
+        if (Auth::check() && Auth::user()->role == 'student' && !Auth::user()->subscription) {
+            return redirect()->route('subscription.show');
+        }
+
         $cursos = Curso::all();
         return view('cursos.index', compact('cursos'));
     }
@@ -115,5 +121,12 @@ class CursoController extends Controller
         $curso->delete();
 
         return redirect('/cursos')->with('success', 'Curso eliminado exitosamente.');
+    }
+
+    //mostrar cursos en welcome
+    public function mostrarCursos()
+    {
+        $cursos = Curso::all();
+        return view('welcome', compact('cursos'));
     }
 }

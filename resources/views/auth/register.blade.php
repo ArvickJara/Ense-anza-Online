@@ -61,6 +61,17 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">Ingrese tipo</label>
+
+                            <div class="col-md-6">
+                                <seLect id="role" name="role" class="form-select">
+                                    <option value="profesor">profesor</option>
+                                    <option value="alumno">alumno</option>
+                                </seLect>
+                            </div>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

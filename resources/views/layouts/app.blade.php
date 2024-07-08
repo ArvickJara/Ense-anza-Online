@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    SDKSDK
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -30,6 +30,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        @auth
+                        @if(Auth::user()->role=="profesor")                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="/cursos">lista de cursos</a>
+                        </li>
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="/notas/ver">ver notas</a>
+                        </li>
+                        @endif
+                        @endauth
 
                     </ul>
 
