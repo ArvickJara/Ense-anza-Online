@@ -17,4 +17,9 @@ class Curso extends Model
         'herramientas',
         'videos',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

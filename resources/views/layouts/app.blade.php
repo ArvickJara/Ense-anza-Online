@@ -45,15 +45,21 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('subscription.show') }}">Suscripción</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/cursosInscritos">Cursos Inscritos</a>
+                                </li>
                             @endif
                         @endauth
                     </ul>
 
-                    <!-- Search Form -->
-                    <form class="d-flex ms-auto" action="{{ route('cursos.search') }}" method="GET">
-                        <input class="form-control me-2" type="search" name="query" placeholder="Buscar cursos" aria-label="Search">
+                    <!-- buscar Form -->
+                    
+
+                    <form class="d-flex ms-auto" action="/cursos/search" method="GET">
+                        <input class="form-control me-2" type="search" name="n" placeholder="Buscar cursos" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
                     </form>
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">

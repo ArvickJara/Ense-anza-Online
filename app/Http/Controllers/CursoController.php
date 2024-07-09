@@ -133,9 +133,28 @@ class CursoController extends Controller
     //buscar curso
     public function search(Request $request)
     {
-        $query = $request->input('query');
-        $cursos = Curso::where('nombre', 'LIKE', "%{$query}%")->get();
+        $n = $request->input('n');
+        $cursos = Curso::where('nombre', 'LIKE', "%{$n}%")->get();
 
         return view('cursos.search_results', compact('cursos'));
     }
+
+    public function showInscritos()
+    {
+        $user = Auth::user();
+        $cursos = $user->cursos; // Obtiene los cursos en los que el usuario está inscrito
+        
+        return view('cursos.inscritos', compact('cursos'));
+    }
+
+    public function inscribirse($id)
+    {
+        $curso = Curso::findOrFail($id);
+        $user = Auth::user();
+        $user->cursos()->attach($curso);
+
+        return redirect('/cursosInscritos')->with('success', 'Curso inscrito exitosamente');
+    }
+
+    
 }

@@ -40,15 +40,17 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('subscription.show') }}">Suscripción</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/cursosInscritos">Cursos Inscritos</a>
+                                </li>
                             @endif
                         @endauth
                     </ul>
-                    <ul>
-                        <form class="d-flex" action="{{ route('cursos.search') }}" method="GET">
-                            <input class="form-control me-2" type="search" name="query" placeholder="Buscar cursos" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Buscar</button>
-                        </form>
-                    </ul>
+                    <form class="d-flex ms-auto" action="/cursos/search" method="GET">
+                        <input class="form-control me-2" type="search" name="query" placeholder="Buscar cursos" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    </form>
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->

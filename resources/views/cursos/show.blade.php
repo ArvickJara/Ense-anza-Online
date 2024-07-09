@@ -17,5 +17,9 @@
             </video>
         </div>
     @endif
+            <form action="{{ route('cursos.inscribirse', $curso->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-primary">Inscribirse</button>
+            </form>
 </div>
 @endsection
