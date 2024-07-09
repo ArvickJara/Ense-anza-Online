@@ -24,7 +24,30 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        
+                    @auth
+                            
+                            @if(Auth::user()->role == 'profesor')                        
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/cursos/create">crear cursos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/cursos">eliminar cursos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/cursos">editar cursos</a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('subscription.show') }}">Suscripción</a>
+                                </li>
+                            @endif
+                        @endauth
+                    </ul>
+                    <ul>
+                        <form class="d-flex" action="{{ route('cursos.search') }}" method="GET">
+                            <input class="form-control me-2" type="search" name="query" placeholder="Buscar cursos" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        </form>
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">

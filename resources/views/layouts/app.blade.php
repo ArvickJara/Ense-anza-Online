@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    SDKSDK
+                    SDkSDK
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -31,18 +31,29 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         @auth
-                        @if(Auth::user()->role=="profesor")                        
-                        <li class="nav-item">
-                            <a class="nav-link" href="/cursos">lista de cursos</a>
-                        </li>
-                        @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="/notas/ver">ver notas</a>
-                        </li>
-                        @endif
+                            @if(Auth::user()->role == 'profesor')                        
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/cursos/create">Crear cursos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/cursos">Eliminar cursos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/cursos">Editar cursos</a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('subscription.show') }}">Suscripción</a>
+                                </li>
+                            @endif
                         @endauth
-
                     </ul>
+
+                    <!-- Search Form -->
+                    <form class="d-flex ms-auto" action="{{ route('cursos.search') }}" method="GET">
+                        <input class="form-control me-2" type="search" name="query" placeholder="Buscar cursos" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    </form>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">

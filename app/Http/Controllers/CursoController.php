@@ -129,4 +129,13 @@ class CursoController extends Controller
         $cursos = Curso::all();
         return view('welcome', compact('cursos'));
     }
+
+    //buscar curso
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $cursos = Curso::where('nombre', 'LIKE', "%{$query}%")->get();
+
+        return view('cursos.search_results', compact('cursos'));
+    }
 }

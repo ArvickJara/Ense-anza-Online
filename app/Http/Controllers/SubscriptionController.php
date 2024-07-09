@@ -1,29 +1,42 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Subscription;
+use Carbon\Carbon;
 
 class SubscriptionController extends Controller
 {
     public function show()
     {
+        $user = Auth::user();
+
+        if ($user && $user->subscription) {
+            $remainingDays = Carbon::now()->diffInDays(Carbon::parse($user->subscription_end_date), false);
+            return view('subscription', compact('remainingDays'));
+        }
+
         return view('subscription');
     }
 
-    public function store(Request $request)
+    public function subscribe(Request $request)
     {
-        $request->validate([
-            'plan' => 'required|in:monthly,annual',
-        ]);
+        $user = Auth::user();
 
-        Subscription::create([
-            'user_id' => Auth::id(),
-            'plan' => $request->plan,
-        ]);
+        if ($user) {
+            if ($request->plan === 'monthly') {
+                $user->subscription = 'monthly';
+                $user->subscription_end_date = Carbon::now()->addDays(30);
+            } elseif ($request->plan === 'annual') {
+                $user->subscription = 'annual';
+                $user->subscription_end_date = Carbon::now()->addDays(365);
+            }
 
-        return redirect()->route('home')->with('success', 'Suscripción realizada con éxito.');
+            $user->save();
+
+            return redirect("/")->with('success', 'Subscription updated successfully.');
+        }
+
+        return redirect()->route('login');
     }
 }

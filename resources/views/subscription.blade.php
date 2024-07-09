@@ -2,34 +2,30 @@
 
 @section('content')
 <div class="container">
-    <h1>Suscríbete a un Plan</h1>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Plan Mensual</h5>
-                    <p class="card-text">Precio: S/. 70.99</p>
-                    <form action="{{ route('subscription.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="plan" value="monthly">
-                        <button type="submit" class="btn btn-primary">Pagar</button>
-                    </form>
-                </div>
-            </div>
+    <h1>Suscripción</h1>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Plan Anual</h5>
-                    <p class="card-text">Precio: S/. 850.99</p>
-                    <form action="{{ route('subscription.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="plan" value="annual">
-                        <button type="submit" class="btn btn-primary">Pagar</button>
-                    </form>
-                </div>
-            </div>
+    @endif
+
+    @if(isset($remainingDays))
+        <div class="alert alert-info">
+            <h2>Contador regresivo</h2>
+            <p>Tu suscripción expirará en {{ $remainingDays }} días.</p>
         </div>
-    </div>
+    @else
+        <form action="{{ route('subscription.subscribe') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="plan">Elige un plan:</label>
+                <select name="plan" id="plan" class="form-control">
+                    <option value="monthly">Mensual - S/. 70.99</option>
+                    <option value="annual">Anual - S/. 850.99</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Suscribirse</button>
+        </form>
+    @endif
 </div>
 @endsection
