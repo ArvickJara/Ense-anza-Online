@@ -40,7 +40,7 @@ Route::put('/cursos/{curso}', [CursoController::class, 'update']);
 Route::delete('/cursos/{curso}', [CursoController::class, 'destroy']);
 
 //buscar curso
-Route::get('/cursoSearch', [CursoController::class, 'search'])->name('cursos.search');
+Route::get('/cursoSearch', [CursoController::class, 'search'])->name('curso.search');
 
 //incribirse en un curso
 Route::post('/cursos/{curso}/inscribirse', [CursoController::class, 'inscribirse'])->name('cursos.inscribirse');

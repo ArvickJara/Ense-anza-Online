@@ -46,8 +46,8 @@
                             @endif
                         @endauth
                     </ul>
-                    <form class="d-flex ms-auto" action="/cursos/search" method="GET">
-                        <input class="form-control me-2" type="search" name="query" placeholder="Buscar cursos" aria-label="Search">
+                    <form class="d-flex" action="{{ route('curso.search') }}" method="GET">
+                        <input class="form-control me-2" type="search" name="name" placeholder="Buscar cursos" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
                     </form>
 

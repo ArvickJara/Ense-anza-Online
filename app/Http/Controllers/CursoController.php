@@ -133,11 +133,12 @@ class CursoController extends Controller
     //buscar curso
     public function search(Request $request)
     {
-        $n = $request->input('n');
-        $cursos = Curso::where('nombre', 'LIKE', "%{$n}%")->get();
-
+        $name = $request->input('name');
+        $cursos = Curso::where('nombre', 'LIKE', "%{$name}%")->get();
+        
         return view('cursos.search_results', compact('cursos'));
     }
+
 
     public function showInscritos()
     {
